@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Process Architect - agent for BitGN ECOM1</title>
+  <meta name="description" content="Process Architect landing page: an agent for BitGN ECOM1 that maintains the operating manual as a versioned map of business processes." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23e3efe8'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='22' font-family='monospace' font-weight='700' fill='%231f6f55'%3EPA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="progress-track" aria-hidden="true"><span class="progress-bar" id="progressBar"></span></div>
+    <nav class="site-nav" aria-label="Page sections">
+      <a class="brand" href="#top" aria-label="Process Architect">
+        <span class="brand-mark" aria-hidden="true">PA</span>
+        <span>Process Architect</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navList">
+        <span>Sections</span>
+        <span class="nav-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+      <ul class="nav-list" id="navList">
+        <li><a href="#contest" data-nav>Конкурс</a></li>
+        <li><a href="#examples" data-nav>Задачи</a></li>
+        <li><a href="#results" data-nav>Результаты</a></li>
+        <li><a href="#ocr" data-nav>Разбор задачи</a></li>
+        <li><a href="#process" data-nav>Process Architect</a></li>
+        <li><a href="#attention" data-nav>Сигнал</a></li>
+        <li><a href="#pa-fix" data-nav>Эволюция</a></li>
+        <li><a href="#architecture" data-nav>Устройство</a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <a class="lang-btn is-active" href="./" data-lang="en" aria-current="true">ENG</a>
+        <a class="lang-btn" href="?lang=ru" data-lang="ru">RU</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">BitGN ECOM1 / business process execution</p>
+        <h1 id="hero-title">Process Architect</h1>
+        <p class="hero-lede">
+          BitGN ECOM1 — это симуляция операционной системы e-commerce бизнеса.
+          Система автоматизирует back-office процессы магазина. Вместо
+          монолитного промпта — карта бизнес-процессов, которая версионируется
+          как код.
+        </p>
+        <div class="result-strip" aria-label="Ключевые результаты">
+          <div class="result-pill">
+            <span>Accuracy</span>
+            <strong>11-е место</strong>
+            <small>Hall of Fame</small>
+          </div>
+          <div class="result-pill">
+            <span>Ultimate</span>
+            <strong>15-е место</strong>
+            <small>Hall of Fame</small>
+          </div>
+          <div class="result-pill">
+            <span>Score</span>
+            <strong>73.2/100</strong>
+            <small>официальный слепой PROD</small>
+          </div>
+          <div class="result-pill muted-pill">
+            <span>Postmortem</span>
+            <strong>93.5/100</strong>
+            <small>после работы над ошибками и одного раунда эволюции</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contest" aria-labelledby="contest-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Соревнование</p>
+          <h2 id="contest-title">Что такое BitGN ECOM1</h2>
+          <p>
+            <a href="https://bitgn.com/challenge/ecom">BitGN Agent Challenge</a>
+            - серия соревнований, где автономные агенты решают задачи внутри
+            детерминированных симуляций реального бизнеса. Выпуск ECOM1
+            посвящен операционной системе интернет-магазина: агент ищет товары,
+            проверяет остатки, собирает корзины, проводит checkout,
+            восстанавливает 3DS-платежи, разбирает возвраты и прикладывает
+            ссылки-доказательства.
+          </p>
+          <p>
+            Среда устроена как Unix-подобная система. На верхнем уровне
+            изолированы: <code>/AGENTS.md</code> (локальные правила),
+            <code>/docs</code> (политики бизнеса), <code>/proc</code>
+            (состояние магазина) и <code>/bin</code> (разрешенные утилиты).
+            Агент должен вывести доменное знание из этого живого мира.
+          </p>
+        </header>
+
+        <div class="system-grid" data-reveal>
+          <article class="system-card">
+            <b>/AGENTS.md</b>
+            <p>Локальные правила запуска и точный формат финального ответа.</p>
+          </article>
+          <article class="system-card">
+            <b>/docs</b>
+            <p>Политики: безопасность, скидки, возвраты, 3DS, crosslist.</p>
+          </article>
+          <article class="system-card">
+            <b>/proc</b>
+            <p>Состояние бизнеса: товары, магазины, корзины, платежи, сотрудники.</p>
+          </article>
+          <article class="system-card">
+            <b>/bin</b>
+            <p>Разрешенные утилиты, которыми агент действует и проверяет факты.</p>
+          </article>
+          <article class="system-card accent-card">
+            <b>answer.json</b>
+            <p>Оцениваются outcome, message, refs и фактические изменения состояния.</p>
+          </article>
+        </div>
+
+        <div class="bitgn-pipeline" data-reveal aria-label="Как оценивается задача BitGN">
+          <div>
+            <span>1</span>
+            <b>Задача</b>
+            <p>Пользователь просит выполнить операцию магазина или создать артефакт.</p>
+          </div>
+          <div>
+            <span>2</span>
+            <b>Действия агента</b>
+            <p>Агент читает правила, политики и записи бизнеса, затем действует через инструменты.</p>
+          </div>
+          <div>
+            <span>3</span>
+            <b>Финальный ответ</b>
+            <p><code>outcome</code>, текст ответа и <code>refs</code> на доказательства.</p>
+          </div>
+          <div>
+            <span>4</span>
+            <b>Score</b>
+            <p>Грейдер проверяет наблюдаемый результат: состояние, формат и ссылки.</p>
+          </div>
+        </div>
+
+        <div class="run-mode" data-reveal>
+          <div>
+            <b>DEV</b>
+            <p>На DEV виден score, поэтому можно читать трейсы и эволюционировать процессы.</p>
+          </div>
+          <div>
+            <b>blind PROD</b>
+            <p>В зачете PROD заранее не виден, а во время прогона нет task-level feedback.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="examples" aria-labelledby="examples-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Примеры задач</p>
+          <h2 id="examples-title">Запросы выглядят как обычная работа магазина</h2>
+          <p>
+            Запросы поступают в естественном виде: с нечеткими названиями,
+            исключениями, чужими кодами и скрытыми требованиями к формату
+            ответа. Агент должен следовать правилам, которые разбросаны по
+            инструкциям, политикам и данным бизнеса.
+          </p>
+        </header>
+
+        <div class="task-grid">
+          <article class="task-card" data-reveal>
+            <span class="task-label">Наличие товара</span>
+            <blockquote>
+              Do you have 8 of 'bosch gex 125 accessory set with discs'
+              (but not PT-SND-BOS-GEX125-DUST) in stock in alpenstrasse tools place?
+            </blockquote>
+            <p>
+              В одной фразе: нечёткое название товара, исключение, нечёткое
+              название филиала и порог количества. Ответ: <code>OUTCOME_OK</code>, <code>FALSE(2)</code>
+              и refs на магазин, товар и policy.
+            </p>
+          </article>
+
+          <article class="task-card task-card-strong" data-reveal>
+            <span class="task-label">Скан заявки -> отчет</span>
+            <blockquote>
+              Read the uploaded competitor purchase request OCR at
+              /uploads/..._ocr.txt and create a TSV crosslist report at
+              /exports/crosslist-....tsv.
+            </blockquote>
+            <p>
+              На входе зашумленный OCR чужой заявки. На выходе готовый TSV:
+              сопоставленные SKU, остатки, причины дефицита и refs. Этот пример
+              разбирается ниже как работа агента под капотом.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results" aria-labelledby="results-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Результаты</p>
+          <h2 id="results-title">Официальный зачет и postmortem</h2>
+          <p>
+            Официальный слепой PROD принес 11-е место (Accuracy). Подход с
+            картой процессов доказал свою состоятельность, однако оценку
+            снизили досадные ошибки реализации: один логический баг (стоивший
+            5-7 баллов), слишком глубоко спрятанный контроль prompt injections
+            и шероховатости в сборке финального ответа (refs).
+          </p>
+          <p>
+            Postmortem-запуски демонстрируют, на что архитектура способна без
+            этих недочетов. Исправление ошибок и чистая адаптация к PROD дали
+            результат близкий к призёрам. А запуск всего одного раунда
+            PA-эволюции — возможности, которой не было в слепом окне, — вывел
+            систему на уровень 93.5/100.
+          </p>
+        </header>
+
+        <div class="score-grid" data-reveal>
+          <div class="score-card">
+            <span>Hall of Fame</span>
+            <strong>73.2/100</strong>
+            <p>Официальный слепой PROD: Accuracy 11-е, Ultimate 15-е.</p>
+          </div>
+          <div class="score-card">
+            <span>Postmortem DEV</span>
+            <strong>54.8/55</strong>
+            <p>Рефакторинг и работа над ошибками в DEV.</p>
+          </div>
+          <div class="score-card">
+            <span>Адаптация к PROD</span>
+            <strong>80.8/100</strong>
+            <p>Если бы в коде не было ошибок.</p>
+          </div>
+          <div class="score-card">
+            <span>Postmortem PROD eval</span>
+            <strong>93.5/100</strong>
+            <p>Один раунд эволюции.</p>
+          </div>
+        </div>
+
+        <div class="screenshot-viewer" data-reveal>
+          <div class="screen-tabs" role="group" aria-label="Скриншоты результатов">
+            <button class="screen-tab is-active" type="button" aria-pressed="true"
+              data-screen-src="assets/hall-of-fame-accuracy.png"
+              data-screen-alt="Hall of Fame Accuracy: Process Architect на 11-м месте с 73.2/100"
+              data-screen-caption="Официальный Accuracy Hall of Fame: 11-е место, 73.2/100.">
+              Accuracy
+            </button>
+            <button class="screen-tab" type="button" aria-pressed="false"
+              data-screen-src="assets/hall-of-fame-ultimate.png"
+              data-screen-alt="Hall of Fame Ultimate: Process Architect на 15-м месте"
+              data-screen-caption="Официальный Ultimate Hall of Fame: 15-е место.">
+              Ultimate
+            </button>
+            <button class="screen-tab" type="button" aria-pressed="false"
+              data-screen-src="assets/postmortem-dev.png"
+              data-screen-alt="Postmortem DEV: 54.8 из 55"
+              data-screen-caption="Postmortem DEV: почти полный проход после исправлений.">
+              DEV
+            </button>
+            <button class="screen-tab" type="button" aria-pressed="false"
+              data-screen-src="assets/postmortem-prod.png"
+              data-screen-alt="Postmortem PROD: 0.81 на 100 задач"
+              data-screen-caption="Postmortem PROD: проверка адаптации на PROD-среде.">
+              PROD
+            </button>
+            <button class="screen-tab" type="button" aria-pressed="false"
+              data-screen-src="assets/postmortem-prod-eval.png"
+              data-screen-alt="Postmortem PROD eval: 93.5/100"
+              data-screen-caption="Postmortem PROD eval: один раунд эволюции поднял результат выше 90.">
+              PROD eval
+            </button>
+          </div>
+          <figure class="screen-stage">
+            <img id="screenImage" src="assets/hall-of-fame-accuracy.png" alt="Hall of Fame Accuracy: Process Architect на 11-м месте с 73.2/100" loading="lazy" />
+            <figcaption id="screenCaption">Официальный Accuracy Hall of Fame: 11-е место, 73.2/100.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="ocr" aria-labelledby="ocr-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Работа агента под капотом</p>
+          <h2 id="ocr-title">Как агент разбирает скан заявки и создает отчет</h2>
+          <p>
+            Современный агент способен выполнять полноценный back-office
+            процесс в живой бизнес-системе. На входе — зашумленный скан чужой
+            заявки (competitor codes), на выходе — готовый TSV-отчет с расчетом
+            дефицита на основе политик.
+          </p>
+        </header>
+
+        <div class="trial-meta" data-reveal>
+          <span>задача t076</span>
+          <span>business_process: purchase_request_crosslist</span>
+          <span>score: 1.0</span>
+          <span>duration: 245 sec</span>
+        </div>
+
+        <div class="ocr-board" data-reveal>
+          <div class="ocr-paper">
+            <div class="paper-head">
+              <b>TOOLHAUS PROCUREMENT</b>
+              <span>OCR source</span>
+            </div>
+            <p>PowerTools target branch: <mark>PowerTools Innsbruck Ost</mark></p>
+            <ol class="ocr-lines">
+              <li><span>9</span> CMP-HMQOZL - Makita DDF485 LXT drill kit 2x5.0Ah</li>
+              <li><span>2</span> CMP-TEPQ3I - Einhell GE-CM 36/36 Li mower body</li>
+              <li><span>7</span> CMP-HMW8GB - Einhell mower kit 2x4.0Ah</li>
+              <li><span>8</span> CMP-3CESSM - 3M safety glasses, protection_type=face</li>
+              <li><span>7</span> CMP-7GZLDR - Bosch GEX dust-control bundle</li>
+              <li><span>9</span> CMP-J9BSXK - DeWalt compact circular saw</li>
+            </ol>
+            <p class="memo">Memo: competitor codes are not PowerTools SKUs.</p>
+          </div>
+
+          <div class="executor-steps">
+            <div class="step-card">
+              <span>01</span>
+              <b>Read</b>
+              <p>Открывает OCR и <code>/docs/purchase-request-crosslist.md</code>.</p>
+            </div>
+            <div class="step-card">
+              <span>02</span>
+              <b>Resolve branch</b>
+              <p>Находит <code>/proc/locations/Innsbruck/store-innsbruck-ost.json</code>, <code>is_open=true</code>.</p>
+            </div>
+            <div class="step-card">
+              <span>03</span>
+              <b>Match products</b>
+              <p>Не принимает competitor codes за SKU, сверяет описание и каждое свойство.</p>
+            </div>
+            <div class="step-card">
+              <span>04</span>
+              <b>Write artifact</b>
+              <p>Считает <code>available_today = max(on_hand - reserved, 0)</code> и пишет TSV.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="line-board" data-reveal>
+          <button class="line-chip ok" type="button" data-line="1" aria-pressed="false"><b>1</b><span>exact</span><small>avail 0 / short 9</small></button>
+          <button class="line-chip ok" type="button" data-line="2" aria-pressed="false"><b>2</b><span>exact</span><small>avail 0 / short 2</small></button>
+          <button class="line-chip ok" type="button" data-line="3" aria-pressed="false"><b>3</b><span>exact</span><small>avail 0 / short 7</small></button>
+          <button class="line-chip warn is-active" type="button" data-line="4" aria-pressed="true"><b>4</b><span>property_mismatch</span><small>face в OCR, eye в каталоге</small></button>
+          <button class="line-chip ok" type="button" data-line="5" aria-pressed="false"><b>5</b><span>exact</span><small>avail 2 / short 5</small></button>
+          <button class="line-chip ok" type="button" data-line="6" aria-pressed="false"><b>6</b><span>exact</span><small>avail 0 / short 9</small></button>
+        </div>
+
+        <div class="line-detail" id="lineDetail" data-reveal aria-live="polite">
+          <span>Строка 4</span>
+          <b>3M safety glasses: property_mismatch</b>
+          <p>В OCR указано <code>protection_type=face</code>, а в каталоге для найденного товара <code>eye</code>. Policy запрещает подстановку похожего товара, поэтому строка идет в отчет без SKU и с нулевым fulfillable quantity.</p>
+        </div>
+
+        <div class="artifact-grid" data-reveal>
+          <div class="table-shell">
+            <table>
+              <caption>TSV preview</caption>
+              <thead>
+                <tr>
+                  <th>line</th>
+                  <th>match_status</th>
+                  <th>matched_sku</th>
+                  <th>available</th>
+                  <th>short</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>exact</td><td>PT-DRL-MAK-DDF485-5AH</td><td>0</td><td>9</td></tr>
+                <tr><td>4</td><td>property_mismatch</td><td>-</td><td>0</td><td>8</td></tr>
+                <tr><td>5</td><td>exact</td><td>PT-SND-BOS-GEX125-DUST</td><td>2</td><td>5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="answer-card">
+<pre><code>{
+  "message": "/exports/crosslist-FAzYcprq.tsv",
+  "outcome": "OUTCOME_OK",
+  "refs": [
+    "/uploads/278ma7TR_competitor_purchase_request_ocr.txt",
+    "/docs/purchase-request-crosslist.md",
+    "/proc/locations/Innsbruck/store-innsbruck-ost.json",
+    "/proc/catalog/...matched-products.json"
+  ]
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Зачем нужен Process Architect</p>
+          <h2 id="process-title">Если агент уже умеет работать, его процессы нужно поддерживать</h2>
+          <p>
+            Если агент уже умеет делать операционную работу, возникает проблема
+            поддержки: как обновлять инструкции, когда схемы БД, форматы и
+            бизнес-правила меняются? Решение — декомпозиция. Инструкции разбиты
+            на immutable-версии процессов (process units), а Process Architect
+            анализирует провалы и выпускает новые версии.
+          </p>
+        </header>
+
+        <div class="process-map" data-reveal>
+          <article>
+            <span>01</span>
+            <b>Instruction Store</b>
+            <p>Версионированные инструкции: <code>checkout</code>, <code>returns</code>, <code>3DS</code>, <code>refs</code>, <code>submission_terminal</code>.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <b>Resolver</b>
+            <p>Выбирает нужные версии под задачу и прикладывает attention, если политика или инструмент изменились.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <b>Executor</b>
+            <p>Решает задачу по отрендеренному мануалу и текущим данным бизнеса.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <b>Process Architect</b>
+            <p>Анализирует провалы и изменения правил, пишет новые immutable-версии процессов.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="world-refresh" aria-labelledby="world-refresh-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">World refresh</p>
+          <h2 id="world-refresh-title">Процессы догоняют изменившуюся среду</h2>
+          <p>
+            Это тяжелая миграция, которую запускают при радикальном изменении
+            среды: например, перед переносом из DEV-песочницы в слепое PROD-окно.
+            Process Architect сравнивает текущие инструкции с новой средой:
+            какие документы появились, какие файлы переехали, какие утилиты
+            исчезли или сменили контракт. PA работает не с общим changelog, а с
+            подсвеченными diff-фрагментами рядом с теми process units, которых
+            они касаются.
+          </p>
+        </header>
+
+        <div class="refresh-deck" data-reveal>
+          <article class="refresh-card">
+            <span>01 / drift</span>
+            <b>Что изменилось в среде</b>
+            <div class="diff-panel compact ide-diff mini-diff">
+<pre><code><span class="diff-meta">world_refresh / PROD drift</span>
+<span class="diff-add">+ /docs/purchase-request-crosslist.md</span>
+<span class="diff-add">+ /docs/availability-checks.md</span>
+<span class="diff-del">- /proc/baskets/&lt;id&gt;.json</span>
+<span class="diff-add">+ /proc/carts/&lt;id&gt;.json</span>
+<span class="diff-del">- /bin/payments refund</span>
+<span class="diff-add">+ /bin/refund close</span>
+<span class="diff-del">- /bin/sql</span>
+<span class="diff-add">+ read live /proc JSON</span></code></pre>
+            </div>
+          </article>
+
+          <article class="refresh-card">
+            <span>02 / routing</span>
+            <b>Resolver связывает diff с картой процессов</b>
+            <ul class="refresh-links">
+              <li><code>/docs/purchase-request-crosslist.md</code><em>new domain</em></li>
+              <li><code>/proc/baskets -> /proc/carts</code><em>basket lifecycle</em></li>
+              <li><code>/bin/refund</code><em>returns</em></li>
+              <li><code>/AGENTS.md</code><em>terminal protocol</em></li>
+            </ul>
+            <p>
+              Не затронутые юниты остаются без текстового патча: меняются только
+              dependency hashes, чтобы resolver не считал их устаревшими.
+            </p>
+          </article>
+
+          <article class="refresh-card">
+            <span>03 / new unit</span>
+            <b>Так родился процесс для OCR-задачи</b>
+            <div class="diff-panel compact ide-diff mini-diff">
+<pre><code><span class="diff-meta">--- bp_purchase_request_crosslist/none</span>
+<span class="diff-meta">+++ bp_purchase_request_crosslist/v0001</span>
+<span class="diff-add">+ New domain: competitor-OCR crosslist TSV</span>
+<span class="diff-add">+ exact match: description + every spec</span>
+<span class="diff-add">+ competitor codes are not PowerTools SKUs</span>
+<span class="diff-add">+ fixed report schema</span>
+<span class="diff-add">+ fixed match_status / reason strings</span>
+<span class="diff-add">+ availability = max(on_hand - reserved, 0)</span></code></pre>
+            </div>
+          </article>
+        </div>
+
+        <div class="refresh-strip" data-reveal>
+          <div>
+            <b>bp_index v0009</b>
+            <span>routing rebuilt</span>
+            <p>Добавил новые маршруты: availability/inventory, dispatch planning и purchase-request crosslist.</p>
+          </div>
+          <div>
+            <b>bp_basket_lifecycle v0006</b>
+            <span>schema moved</span>
+            <p>Переехал с <code>/proc/baskets</code> на <code>/proc/carts</code> и убрал SQL из процесса.</p>
+          </div>
+          <div>
+            <b>bp_submission_terminal v0010</b>
+            <span>no content change</span>
+            <p>Текст процесса не менялся: PA только пере-привязал dependency hash к обновленному <code>/AGENTS.md</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="attention" aria-labelledby="attention-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Attention</p>
+          <h2 id="attention-title">Политика изменилась - агент получает сигнал</h2>
+          <p>
+            Attention - легкая подстройка на лету, без пересборки всего мануала.
+            Оркестратор сверяет текущие файлы с базлайном по sha256-хэшам, а
+            Resolver собирает точный dependency-aware diff для затронутого
+            процесса. Если <code>/docs/payments/3ds.md</code> меняет лимит
+            попыток с 2 на 3, Executor видит Heads-up прямо внутри
+            <code>payments_3ds_recovery</code> и действует по актуальной policy.
+          </p>
+        </header>
+
+        <div class="attention-grid" data-reveal>
+          <div class="diff-panel compact ide-diff">
+<pre><code><span class="diff-meta">--- snapshot/docs/payments/3ds.md</span>
+<span class="diff-meta">+++ current/docs/payments/3ds.md</span>
+<span class="diff-hunk">@@</span>
+<span> In this workspace, a 3DS session allows up to</span>
+<span class="diff-del">-2 attempts.</span>
+<span class="diff-add">+3 attempts.</span></code></pre>
+          </div>
+
+          <div class="process-excerpt">
+            <span>Фрагмент процесса payments_3ds_recovery.md</span>
+            <div class="process-alert">
+              <b>Heads-up внутри процесса</b>
+              <p>
+                Этот процесс мог устареть: файлы, против которых он был написан,
+                изменились. Если текст процесса расходится с актуальной policy,
+                агент доверяет актуальной policy.
+              </p>
+            </div>
+            <p>
+              Ниже идут обычные проверки 3DS recovery, но лимит попыток уже
+              берется из обновленного документа.
+            </p>
+          </div>
+        </div>
+
+        <p class="trace-label" data-reveal>
+          Перед вызовом инструмента восстановления агент проходит gate trace:
+          проверяет право пользователя, состояние корзины, состояние платежа,
+          новый лимит попыток и только потом делает mutating action.
+        </p>
+        <ol class="gate-trace" data-reveal>
+          <li><b>1</b><span>identity match</span></li>
+          <li><b>2</b><span>payment <code>requires_3ds_action</code></span></li>
+          <li><b>3</b><span>basket <code>checked_out</code></span></li>
+          <li><b>4</b><span><code>attempts 1 &lt; max_attempts 3</code></span></li>
+          <li><b>5</b><span><code>3ds-status2</code> recoverable</span></li>
+          <li><b>6</b><span><code>/bin/payments recover-3ds</code></span></li>
+          <li><b>7</b><span>post-state checked</span></li>
+        </ol>
+
+        <p class="plain-callout" data-reveal>
+          В успешной задаче t083 финальный ответ уже использовал обновленное
+          правило: "1 of 3 attempts used". Score: 1.0.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="pa-fix" aria-labelledby="pa-fix-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">PA-fix</p>
+          <h2 id="pa-fix-title">Маленький patch в правильном слое</h2>
+          <p>
+            PA-fix - это эволюция после ответа грейдера: когда уже есть score,
+            сообщение об ошибке и лог действий агента, Process Architect ищет владеющий слой и
+            выпускает новую immutable-версию процесса. В одной задаче агент
+            должен был ответить yes/no в формате, заданном текущими правилами
+            запуска. Он вернул старый токен <code>TRUE(1)</code>, а грейдер ждал
+            <code>ja</code>. Проблема была не ошибкой нейросети, а архитектурной
+            недоработкой: правила финальной отправки просочились в routing
+            index. Маршрутизатор <code>bp_index</code> захардкодил старый токен
+            ответа, в то время как форматированием должен управлять только
+            терминал отправки, читающий актуальный <code>/AGENTS.md</code>.
+          </p>
+        </header>
+
+        <div class="fix-layout" data-reveal>
+          <div class="failure-card">
+            <span>Что сломалось</span>
+            <b>Answer should be "ja"</b>
+            <p>Эмитнулся <code>TRUE(1)</code>. Это не частный немецкий случай: любой yes/no token должен читаться из live <code>/AGENTS.md</code>.</p>
+          </div>
+          <div class="failure-card">
+            <span>Диагноз</span>
+            <b>terminal_protocol leak into bp_index</b>
+            <p><code>bp_index</code> должен выбирать процесс и outcome, а не хранить literal финального ответа.</p>
+          </div>
+          <div class="failure-card">
+            <span>Владелец</span>
+            <b>submission_terminal</b>
+            <p>Формат финального ответа принадлежит terminal-юниту, который читает актуальные правила перед отправкой.</p>
+          </div>
+        </div>
+
+        <div class="diff-panel ide-diff" data-reveal>
+<pre><code><span class="diff-meta">--- bp_index/v0010/content.md</span>
+<span class="diff-meta">+++ bp_index/v0011/content.md</span>
+<span class="diff-hunk">@@</span>
+<span class="diff-del">- ... live /AGENTS.md styling, including the TRUE(1)/FALSE(0) yes/no token.</span>
+<span class="diff-add">+ ... live answer styling from /AGENTS.md at submit time;</span>
+<span class="diff-add">+ this index does not restate the literal token.</span>
+<span class="diff-add">+ Never assume a fixed yes/no token: it is whatever live /AGENTS.md</span>
+<span class="diff-add">+ currently specifies and is locale-specific.</span></code></pre>
+        </div>
+
+        <div class="layer-map" data-reveal>
+          <div><b>/AGENTS.md</b><span>источник live token</span></div>
+          <div><b>bp_submission_terminal</b><span>форматирует финальный message</span></div>
+          <div><b>bp_index</b><span>маршрутизирует к процессу и outcome</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="architecture" aria-labelledby="architecture-title">
+      <div class="wrap">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Как устроено внутри</p>
+          <h2 id="architecture-title">Процессы можно поддерживать как код</h2>
+          <p>
+            В проекте нет набора хардкодов под конкретные задачи. Есть короткие
+            инструкции для классов операций, механизм выбора нужных инструкций
+            под задачу и отдельный агент, который выпускает новые версии, когда
+            правила или поведение оказываются неверными.
+          </p>
+        </header>
+
+        <div class="architecture-grid" data-reveal>
+          <article>
+            <b>Process unit</b>
+            <p>Небольшая инструкция для одного класса операций: checkout, возвраты, 3DS, refs, формат ответа.</p>
+          </article>
+          <article>
+            <b>Resolver</b>
+            <p>Выбирает, какие инструкции нужны для конкретной задачи, и прикладывает предупреждения об изменившихся политиках.</p>
+          </article>
+          <article>
+            <b>Executor</b>
+            <p>Решает задачу по выбранному мануалу: читает файлы, вызывает инструменты, проверяет состояние после действия.</p>
+          </article>
+          <article>
+            <b>Process Architect</b>
+            <p>Разбирает провалы и изменения среды, затем выпускает новую immutable-версию инструкции с diff и rationale.</p>
+          </article>
+        </div>
+
+        <div class="ops-strip" data-reveal>
+          <b>Обновление среды</b>
+          <p>
+            Когда меняются политики, утилиты или схема данных, resolver сначала
+            подсвечивает это исполнителю, а Process Architect затем обновляет
+            затронутые инструкции. Фикс не переписывает историю: появляется
+            новая папка <code>vNNNN/</code> с manifest, diff, rationale и rollback.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <b>Игорь Ласийчук</b>
+        <p>15 лет внедрения Dynamics AX (Axapta) в компаниях различных отраслей: разработчик, архитектор. Последнее время - Java Tech-lead.</p>
+        <a class="footer-telegram" href="https://t.me/GaricY">Telegram: @GaricY</a>
+      </div>
+      <nav aria-label="Ссылки">
+        <a href="https://bitgn.com/challenge/ecom">BitGN ECOM1</a>
+        <a href="https://github.com/GaricY/ecom1-process-architect/blob/postmortem-prod/README_RU.md">GitHub / README_RU</a>
+        <a href="https://github.com/GaricY/ecom1-process-architect/blob/postmortem-prod/ARCHITECTURE_RU.md">Описание архитектуры</a>
+        <a href="https://www.linkedin.com/in/igor-lasiychuk/">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
